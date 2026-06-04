@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RotterdamXplore — Fort Rotterdam Makassar</title>
+  <meta name="description" content="Jelajahi warisan budaya dan sejarah Fort Rotterdam Makassar. Temukan sejarah, info kunjungan, eksplorasi, galeri foto, dan pemesanan tiket secara online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN SYSTEM & VARIABLES
+============================================================ */
+:root {
+  --terracotta: #C1440E;
+  --terracotta-dark: #8B2E08;
+  --terracotta-light: #E8835A;
+  --cream: #F5EDD8;
+  --cream-dark: #E8D9B8;
+  --dark: #1A1208;
+  --dark-mid: #2D2015;
+  --stone: #6B5B47;
+  --stone-light: #9C8B76;
+  --text-body: #3D2B1A;
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --white: #FDFAF4;
+  --glass-bg: rgba(26, 18, 8, 0.92);
+  --glass-border: rgba(201, 168, 76, 0.2);
+  --shadow-warm: rgba(139, 46, 8, 0.08);
+  --font-headings: 'Playfair Display', Georgia, serif;
+  --font-body: 'Crimson Pro', Georgia, serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-body); background: var(--cream); color: var(--text-body); overflow-x: hidden; line-height: 1.6; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--terracotta-dark); }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.35;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  background: var(--terracotta); color: var(--white); border: none;
+  padding: 1rem 2.2rem; cursor: pointer; transition: all 0.3s ease;
+  text-decoration: none; display: inline-block;
+  box-shadow: 0 4px 15px rgba(193,68,14,0.2);
+}
+.btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(193,68,14,0.35); }
+
+.btn-outline {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  background: transparent; color: var(--cream); border: 1px solid rgba(245,237,216,0.5);
+  padding: 1rem 2.2rem; cursor: pointer; transition: all 0.3s ease;
+  text-decoration: none; display: inline-block;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+.section-label {
+  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--terracotta-light); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem;
+}
+.section-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--terracotta-light); }
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 4rem; height: 76px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border); transition: all 0.3s ease;
+}
+.nav-logo { font-family: var(--font-headings); font-size: 1.4rem; font-weight: 900; color: var(--cream); letter-spacing: 0.02em; cursor: pointer; text-decoration: none; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,216,0.7); text-decoration: none; transition: color 0.25s; cursor: pointer; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-cta { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--terracotta); color: var(--white); border: none; padding: 0.6rem 1.4rem; cursor: pointer; transition: all 0.25s ease; text-decoration: none; }
+.nav-cta:hover { background: var(--terracotta-dark); box-shadow: 0 4px 12px rgba(193,68,14,0.3); }
+
+/* ===== PAGE SECTIONS ===== */
+.page-section { display: none; min-height: 100vh; padding-top: 76px; animation: pageFadeIn 0.5s ease forwards; }
+.page-section.active { display: block; }
+@keyframes pageFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============================================================
+   HOME PAGE
+============================================================ */
+#home { padding-top: 0; }
+
+.hero { position: relative; height: 100vh; min-height: 650px; display: flex; align-items: flex-end; overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(26,18,8,0.2) 0%, rgba(26,18,8,0.88) 100%),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover no-repeat;
+  animation: slowzoom 22s ease-in-out infinite alternate;
+}
+@keyframes slowzoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+.hero-content { position: relative; z-index: 2; padding: 0 6rem 7rem; max-width: 960px; }
+.hero-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.45); padding: 0.4rem 1rem; margin-bottom: 1.8rem; }
+.hero h1 { font-family: var(--font-headings); font-size: clamp(3rem,6.5vw,5.5rem); font-weight: 900; color: var(--cream); line-height: 1.05; margin-bottom: 1.5rem; }
+.hero h1 em { font-style: italic; color: var(--terracotta-light); }
+.hero p { font-size: 1.25rem; color: rgba(245,237,216,0.85); max-width: 580px; line-height: 1.65; margin-bottom: 2.8rem; font-weight: 300; }
+.hero-btns { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+
+.hero-scroll-hint { position: absolute; bottom: 2.5rem; right: 6rem; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.hero-scroll-hint span { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(245,237,216,0.5); writing-mode: vertical-rl; }
+.scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, rgba(245,237,216,0.5), transparent); animation: scrollpulse 2s ease-in-out infinite; }
+@keyframes scrollpulse { 0%,100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(5px); } }
+
+.highlights-bar { background: var(--dark); padding: 0; display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid rgba(201,168,76,0.15); }
+.highlight-item { padding: 3rem 2rem; border-right: 1px solid rgba(201,168,76,0.1); cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; flex-direction: column; }
+.highlight-item:last-child { border-right: none; }
+.highlight-item:hover { background: rgba(201,168,76,0.06); transform: translateY(-4px); }
+.hi-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.hi-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; display: block; }
+.hi-value { font-family: var(--font-headings); font-size: 1.15rem; font-weight: 700; color: var(--cream); }
+
+.home-about { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
+.home-about-img {
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg') center/cover no-repeat;
+  position: relative;
+}
+.home-about-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent, rgba(193,68,14,0.18)); }
+.home-about-text { background: var(--dark-mid); padding: 6rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+.home-about-text h2 { font-family: var(--font-headings); font-size: 2.6rem; font-weight: 900; color: var(--cream); line-height: 1.2; margin-bottom: 1.8rem; }
+.home-about-text p { font-size: 1.1rem; color: rgba(245,237,216,0.72); line-height: 1.8; margin-bottom: 2rem; font-weight: 300; }
+
+.home-spots { padding: 7rem 6rem; background: var(--cream); }
+.home-spots-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; }
+.home-spots-header h2 { font-family: var(--font-headings); font-size: 2.8rem; font-weight: 900; color: var(--dark); line-height: 1.15; }
+.spots-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+.spot-card { background: var(--white); border: 1px solid var(--cream-dark); overflow: hidden; cursor: pointer; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease; text-decoration: none; display: block; }
+.spot-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px var(--shadow-warm); }
+.spot-card-img { height: 220px; background-position: center; background-size: cover; background-repeat: no-repeat; position: relative; overflow: hidden; transition: transform 0.5s ease; }
+.spot-card:hover .spot-card-img { transform: scale(1.04); }
+.spot-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.7), transparent 60%); opacity: 0.2; transition: opacity 0.3s; }
+.spot-card:hover .spot-card-img::after { opacity: 0.8; }
+.spot-card-body { padding: 1.8rem; }
+.spot-tag { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.6rem; display: block; }
+.spot-card-body h3 { font-family: var(--font-headings); font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 0.6rem; }
+.spot-card-body p { font-size: 0.95rem; color: var(--stone); line-height: 1.65; }
+
+/* ============================================================
+   HISTORY PAGE
+============================================================ */
+#history { background: var(--dark); }
+.history-hero {
+  height: 52vh; min-height: 380px;
+  background: linear-gradient(to bottom, rgba(26,18,8,0.35), rgba(26,18,8,0.92)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center 35%/cover;
+  display: flex; align-items: flex-end; padding: 4rem 6rem;
+}
+.page-hero-content .page-tag { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; }
+.page-hero-content h1 { font-family: var(--font-headings); font-size: clamp(2rem,5.5vw,4rem); font-weight: 900; color: var(--cream); line-height: 1.1; }
+.history-body { background: var(--dark); padding: 6rem 6rem 8rem; }
+.history-timeline { position: relative; max-width: 860px; margin: 0 auto; }
+.history-timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); }
+.timeline-item { padding-left: 3.5rem; padding-bottom: 5rem; position: relative; opacity: 0; transform: translateX(-20px); animation: fadeslide 0.6s ease forwards; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.25s; }
+.timeline-item:nth-child(3) { animation-delay: 0.4s; }
+.timeline-item:nth-child(4) { animation-delay: 0.55s; }
+.timeline-item:nth-child(5) { animation-delay: 0.7s; }
+@keyframes fadeslide { to { opacity: 1; transform: translateX(0); } }
+.timeline-dot { position: absolute; left: -6px; top: 6px; width: 13px; height: 13px; border-radius: 50%; background: var(--terracotta); border: 3px solid var(--gold); box-shadow: 0 0 10px rgba(201,168,76,0.5); }
+.timeline-year { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.8rem; display: block; }
+.timeline-item h3 { font-family: var(--font-headings); font-size: 1.6rem; font-weight: 700; color: var(--cream); margin-bottom: 1rem; }
+.timeline-item p { font-size: 1.05rem; color: rgba(245,237,216,0.68); line-height: 1.8; font-weight: 300; max-width: 680px; }
+.history-facts { background: var(--dark-mid); border-top: 1px solid rgba(201,168,76,0.12); padding: 5rem 6rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
+.fact-card { background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.15); padding: 2.5rem; text-align: center; transition: border-color 0.3s, background 0.3s; }
+.fact-card:hover { border-color: var(--terracotta); background: rgba(193,68,14,0.04); }
+.fact-number { font-family: var(--font-headings); font-size: 3.8rem; font-weight: 900; color: var(--terracotta); line-height: 1; margin-bottom: 0.5rem; }
+.fact-desc { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,216,0.55); }
+
+/* ============================================================
+   VISITOR PAGE
+============================================================ */
+#visitor { background: var(--cream); }
+.visitor-hero {
+  height: 42vh; min-height: 320px;
+  background: linear-gradient(135deg, rgba(139,46,8,0.85), rgba(26,18,8,0.8)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover;
+  display: flex; align-items: flex-end; padding: 4rem 6rem;
+}
+.visitor-body { padding: 6rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.info-block { background: var(--white); border: 1px solid var(--cream-dark); padding: 3rem; box-shadow: 0 4px 15px rgba(26,18,8,0.02); }
+.info-block-title { font-family: var(--font-headings); font-size: 1.4rem; font-weight: 700; color: var(--dark); margin-bottom: 2rem; padding-bottom: 1.2rem; border-bottom: 2px solid var(--terracotta); display: flex; align-items: center; gap: 0.8rem; }
+.info-row { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.2rem 0; border-bottom: 1px solid var(--cream-dark); }
+.info-row:last-child { border-bottom: none; }
+.info-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.info-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-bottom: 0.3rem; display: block; }
+.info-val { font-size: 1.05rem; color: var(--text-body); font-weight: 600; }
+.ticket-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+.ticket-table th { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-align: left; padding: 0.8rem 0; border-bottom: 1px solid var(--cream-dark); }
+.ticket-table td { padding: 1rem 0; font-size: 1.05rem; border-bottom: 1px solid var(--cream-dark); color: var(--text-body); }
+.ticket-table tr:last-child td { border-bottom: none; }
+.ticket-table td:last-child { font-weight: 700; color: var(--terracotta-dark); text-align: right; }
+.map-embed { grid-column: 1 / -1; background: var(--white); border: 1px solid var(--cream-dark); overflow: hidden; }
+.map-header { padding: 2rem; border-bottom: 1px solid var(--cream-dark); display: flex; align-items: center; gap: 0.8rem; }
+.map-header h3 { font-family: var(--font-headings); font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+.map-frame {
+  height: 400px;
+  background: linear-gradient(rgba(26,18,8,0.45), rgba(26,18,8,0.7)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg') center/cover;
+  display: flex; align-items: center; justify-content: center; position: relative; padding: 2rem;
+}
+.map-overlay-card { background: var(--white); padding: 2.2rem; border-radius: 4px; max-width: 380px; text-align: center; box-shadow: 0 15px 35px rgba(26,18,8,0.25); border: 1px solid var(--cream-dark); }
+.map-overlay-card h4 { font-family: var(--font-headings); font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--dark); }
+.map-overlay-card p { font-size: 0.92rem; color: var(--stone); margin-bottom: 1.5rem; line-height: 1.5; }
+.map-pin { background: var(--terracotta); color: white; padding: 0.8rem 1.6rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.6rem; box-shadow: 0 6px 20px rgba(193,68,14,0.3); cursor: pointer; text-decoration: none; transition: all 0.25s ease; }
+.map-pin:hover { background: var(--terracotta-dark); transform: scale(1.04); }
+.rules-list { list-style: none; }
+.rules-list li { display: flex; align-items: flex-start; gap: 1rem; padding: 0.8rem 0; font-size: 1.02rem; color: var(--text-body); border-bottom: 1px solid var(--cream-dark); }
+.rules-list li:last-child { border-bottom: none; }
+.rules-list li::before { content: '✗'; color: var(--terracotta); font-weight: bold; flex-shrink: 0; }
+
+/* ============================================================
+   ATTRACTIONS PAGE
+============================================================ */
+#attractions { background: var(--cream); }
+.attractions-hero {
+  height: 42vh; min-height: 320px;
+  background: linear-gradient(to right, rgba(26,18,8,0.85), rgba(193,68,14,0.45)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') right/cover;
+  display: flex; align-items: flex-end; padding: 4rem 6rem;
+}
+.attractions-grid-wrap { padding: 6rem 6rem; }
+.attractions-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: var(--cream-dark); border: 2px solid var(--cream-dark); }
+.attraction-card { background: var(--white); display: grid; grid-template-columns: 240px 1fr; overflow: hidden; cursor: pointer; transition: all 0.3s ease; min-height: 200px; }
+.attraction-card:hover { background: var(--cream); }
+.attraction-img { background-position: center; background-size: cover; background-repeat: no-repeat; position: relative; }
+.attraction-num { position: absolute; top: 1.2rem; left: 1.2rem; font-family: var(--font-headings); font-size: 2.2rem; font-weight: 900; color: rgba(245,237,216,0.35); line-height: 1; }
+.attraction-body { padding: 2rem 2.2rem; display: flex; flex-direction: column; justify-content: center; }
+.attr-type { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.6rem; }
+.attraction-body h3 { font-family: var(--font-headings); font-size: 1.35rem; font-weight: 700; color: var(--dark); margin-bottom: 0.8rem; }
+.attraction-body p { font-size: 0.95rem; color: var(--stone); line-height: 1.65; }
+
+/* ============================================================
+   FACILITIES PAGE
+============================================================ */
+#facilities { background: var(--dark); }
+.facilities-hero {
+  height: 42vh; min-height: 300px;
+  background: linear-gradient(to bottom, rgba(26,18,8,0.55), rgba(26,18,8,0.92)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg') center/cover;
+  display: flex; align-items: flex-end; padding: 4rem 6rem;
+}
+.facilities-grid-wrap { padding: 6rem 6rem; }
+.facilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+.facility-card { background: rgba(245,237,216,0.04); border: 1px solid rgba(201,168,76,0.12); padding: 3rem 2.2rem; text-align: center; transition: all 0.35s cubic-bezier(0.16,1,0.3,1); cursor: default; }
+.facility-card:hover { border-color: rgba(193,68,14,0.45); background: rgba(193,68,14,0.06); transform: translateY(-5px); }
+.fac-icon { font-size: 2.8rem; margin-bottom: 1.2rem; display: block; }
+.facility-card h3 { font-family: var(--font-headings); font-size: 1.2rem; font-weight: 700; color: var(--cream); margin-bottom: 0.8rem; }
+.facility-card p { font-size: 0.92rem; color: rgba(245,237,216,0.55); line-height: 1.7; font-weight: 300; margin-bottom: 1.5rem; }
+.fac-status { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.9rem; display: inline-block; }
+.fac-available { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+.fac-limited { background: rgba(201,168,76,0.15); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3); }
+
+/* ============================================================
+   GALLERY PAGE
+============================================================ */
+#gallery { background: var(--dark); }
+.gallery-hero {
+  height: 38vh; min-height: 280px;
+  background: linear-gradient(to bottom, transparent, var(--dark)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover;
+  display: flex; align-items: flex-end; padding: 4rem 6rem;
+}
+.gallery-body { padding: 5rem 6rem; }
+.gallery-filter { display: flex; gap: 1.2rem; margin-bottom: 3.5rem; flex-wrap: wrap; justify-content: center; }
+.filter-btn { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: rgba(245,237,216,0.5); border: 1px solid rgba(245,237,216,0.15); padding: 0.6rem 1.6rem; cursor: pointer; transition: all 0.3s ease; }
+.filter-btn.active, .filter-btn:hover { background: var(--terracotta); color: var(--white); border-color: var(--terracotta); }
+.gallery-masonry { columns: 3; column-gap: 1.5rem; }
+.gallery-item { break-inside: avoid; margin-bottom: 1.5rem; overflow: hidden; position: relative; cursor: pointer; background: var(--dark-mid); transition: all 0.3s ease; }
+.gallery-item img { width: 100%; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+.gallery-item:hover img { transform: scale(1.06); }
+.gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.9) 0%, transparent 60%); opacity: 0; transition: opacity 0.35s ease; display: flex; align-items: flex-end; padding: 1.5rem; }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream); }
+.lightbox { position: fixed; inset: 0; background: rgba(26,18,8,0.96); z-index: 9000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 2rem; }
+.lightbox.open { display: flex; }
+.lightbox-content { position: relative; text-align: center; max-width: 90vw; }
+.lightbox img { max-width: 85vw; max-height: 75vh; object-fit: contain; border: 1px solid var(--glass-border); }
+.lightbox-caption { font-size: 1.15rem; color: var(--cream); margin-top: 1.2rem; font-weight: 300; }
+.lightbox-close { position: absolute; top: 2rem; right: 2rem; background: var(--terracotta); border: none; color: white; width: 48px; height: 48px; font-size: 1.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; z-index: 9100; }
+.lightbox-close:hover { background: var(--terracotta-dark); transform: rotate(90deg); }
+
+/* ============================================================
+   CONTACT PAGE
+============================================================ */
+#contact { background: var(--cream); }
+.contact-hero {
+  height: 38vh; min-height: 280px;
+  background: linear-gradient(135deg, rgba(139,46,8,0.9), rgba(26,18,8,0.75)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover;
+  display: flex; align-items: flex-end; padding: 4rem 6rem;
+}
+.contact-body { padding: 6rem 6rem; display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; }
+.contact-info h2 { font-family: var(--font-headings); font-size: 2.2rem; font-weight: 900; color: var(--dark); margin-bottom: 1.5rem; line-height: 1.2; }
+.contact-info p { font-size: 1.1rem; color: var(--stone); line-height: 1.75; margin-bottom: 3rem; font-weight: 300; }
+.contact-detail { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.8rem; }
+.contact-icon { width: 44px; height: 44px; background: var(--terracotta); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(193,68,14,0.25); }
+.contact-detail-text span { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); display: block; margin-bottom: 0.3rem; }
+.contact-detail-text p { font-size: 1.05rem; color: var(--text-body); margin: 0; font-weight: 600; }
+.booking-form-wrapper { background: var(--white); border: 1px solid var(--cream-dark); padding: 3rem; position: relative; box-shadow: 0 10px 30px var(--shadow-warm); }
+.form-title { font-family: var(--font-headings); font-size: 1.6rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+.form-subtitle { font-size: 0.95rem; color: var(--stone); margin-bottom: 2.5rem; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); display: block; margin-bottom: 0.6rem; }
+.form-group input, .form-group select { width: 100%; background: var(--cream); border: 1px solid var(--cream-dark); padding: 0.9rem 1.2rem; font-family: var(--font-body); font-size: 1.05rem; color: var(--text-body); outline: none; transition: border-color 0.25s; border-radius: 0; appearance: none; }
+.form-group input:focus, .form-group select:focus { border-color: var(--terracotta); background: var(--white); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.price-summary-box { background: var(--cream-dark); padding: 1.5rem 1.8rem; margin: 2rem 0; border: 1px dashed var(--stone-light); }
+.summary-row { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 1rem; color: var(--stone); }
+.summary-row span:last-child { font-weight: 600; color: var(--text-body); }
+.discount-row { color: #166534; }
+.discount-row span:last-child { color: #166534; }
+.total-row { border-top: 1px solid var(--stone-light); padding-top: 1rem; margin-top: 0.5rem; font-size: 1.15rem; }
+.total-row span:first-child { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-body); font-weight: 700; }
+.total-row span:last-child { font-family: var(--font-headings); font-size: 1.4rem; font-weight: 900; color: var(--terracotta); }
+.form-submit { width: 100%; background: var(--terracotta); color: var(--white); border: none; padding: 1.1rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(193,68,14,0.2); }
+.form-submit:hover { background: var(--terracotta-dark); box-shadow: 0 6px 18px rgba(193,68,14,0.35); }
+.booking-form { transition: opacity 0.3s ease; }
+.booking-form.hide { opacity: 0; pointer-events: none; display: none; }
+.form-success { display: none; text-align: center; padding: 4rem 2rem; }
+.form-success.show { display: block; animation: successPop 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+@keyframes successPop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+.form-success-icon { font-size: 4rem; margin-bottom: 1.5rem; display: block; }
+.form-success h3 { font-family: var(--font-headings); font-size: 1.8rem; color: var(--dark); margin-bottom: 1rem; font-weight: 700; }
+.form-success p { font-size: 1.1rem; color: var(--stone); line-height: 1.75; font-weight: 300; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer { background: var(--dark); padding: 5rem 6rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 4rem; border-top: 1px solid rgba(201,168,76,0.12); }
+.footer-brand h3 { font-family: var(--font-headings); font-size: 1.5rem; font-weight: 900; color: var(--cream); margin-bottom: 1rem; }
+.footer-brand h3 span { color: var(--gold); }
+.footer-brand p { font-size: 0.95rem; color: rgba(245,237,216,0.48); line-height: 1.75; font-weight: 300; }
+.footer-col h4 { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.8rem; }
+.footer-col ul li a { font-size: 0.95rem; color: rgba(245,237,216,0.48); text-decoration: none; cursor: pointer; transition: color 0.25s; }
+.footer-col ul li a:hover { color: var(--cream); }
+.footer-bottom { background: rgba(26,18,8,0.92); padding: 1.5rem 6rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(201,168,76,0.08); }
+.footer-bottom p { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,216,0.3); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1024px) {
+  nav { padding: 0 2rem; }
+  .hero-content { padding: 0 3rem 5rem; }
+  .history-body, .history-facts, .visitor-body, .attractions-grid-wrap,
+  .facilities-grid-wrap, .gallery-body, .contact-body, .home-spots { padding: 4rem 2rem; }
+  .history-hero, .visitor-hero, .attractions-hero, .facilities-hero, .gallery-hero, .contact-hero { padding: 3rem 2rem; }
+  footer { padding: 4rem 2rem; grid-template-columns: 1.2fr 1fr 1fr; gap: 2.5rem; }
+  .footer-bottom { padding: 1.5rem 2rem; }
+  .home-about-text { padding: 4rem 3rem; }
+  .spots-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .gallery-masonry { columns: 2; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 1.5rem; height: 70px; }
+  .nav-links { display: none; }
+  .nav-logo { font-size: 1.25rem; }
+  .page-section { padding-top: 70px; }
+  .hero-content { padding: 0 1.5rem 4rem; }
+  .hero h1 { font-size: 3.2rem; }
+  .hero p { font-size: 1.1rem; margin-bottom: 2rem; }
+  .highlights-bar { grid-template-columns: 1fr 1fr; }
+  .highlight-item { padding: 2rem 1.5rem; align-items: center; text-align: center; }
+  .home-about { grid-template-columns: 1fr; min-height: auto; }
+  .home-about-img { height: 300px; }
+  .spots-grid, .attractions-grid, .facilities-grid, .history-facts { grid-template-columns: 1fr; }
+  .attraction-card { grid-template-columns: 1fr; }
+  .attraction-img { height: 220px; }
+  .visitor-body { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-body { grid-template-columns: 1fr; gap: 3rem; }
+  footer { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .lightbox-close { top: 1rem; right: 1rem; }
+}
+@media (max-width: 480px) {
+  .highlights-bar { grid-template-columns: 1fr; }
+  .highlight-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.1); }
+  .highlight-item:last-child { border-bottom: none; }
+  .home-spots-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .gallery-masonry { columns: 1; }
+  .booking-form-wrapper { padding: 2rem 1.5rem; }
+  .info-block { padding: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav id="navbar">
+  <a class="nav-logo" onclick="showPage('home')" href="#">Rotterdam<span>Xplore</span></a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" class="nav-item active" id="nav-home">Beranda</a></li>
+    <li><a onclick="showPage('history')" class="nav-item" id="nav-history">Sejarah</a></li>
+    <li><a onclick="showPage('visitor')" class="nav-item" id="nav-visitor">Kunjungan</a></li>
+    <li><a onclick="showPage('attractions')" class="nav-item" id="nav-attractions">Eksplorasi</a></li>
+    <li><a onclick="showPage('facilities')" class="nav-item" id="nav-facilities">Fasilitas</a></li>
+    <li><a onclick="showPage('gallery')" class="nav-item" id="nav-gallery">Galeri</a></li>
+    <li><a onclick="showPage('contact')" class="nav-item" id="nav-contact">Kontak</a></li>
+  </ul>
+  <a class="nav-cta" onclick="showPage('contact')" href="#">Pesan Tiket</a>
+</nav>
+
+<!-- ============================================================
+     HOME PAGE
+============================================================ -->
+<section id="home" class="page-section active">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🏛 Makassar, Sulawesi Selatan</div>
+      <h1>Jejak Sejarah<br><em>Fort Rotterdam</em></h1>
+      <p>Jelajahi warisan budaya Kerajaan Gowa-Tallo dan peninggalan kolonial VOC melalui pengalaman wisata edukatif yang imersif.</p>
+      <div class="hero-btns">
+        <a class="btn-primary" onclick="showPage('attractions')" href="#">Mulai Eksplorasi</a>
+        <a class="btn-outline" onclick="showPage('history')" href="#">Pelajari Sejarah</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <div class="highlights-bar">
+    <a class="highlight-item" onclick="showPage('visitor')" href="#">
+      <span class="hi-icon">🕐</span>
+      <span class="hi-label">Jam Buka Hari Ini</span>
+      <span class="hi-value">08:00 – 18:00 WITA</span>
+    </a>
+    <a class="highlight-item" onclick="showPage('visitor')" href="#">
+      <span class="hi-icon">🎟</span>
+      <span class="hi-label">Harga Tiket</span>
+      <span class="hi-value">Mulai Rp 5.000</span>
+    </a>
+    <a class="highlight-item" onclick="showPage('attractions')" href="#">
+      <span class="hi-icon">🏛</span>
+      <span class="hi-label">Bangunan Bersejarah</span>
+      <span class="hi-value">16 Gedung</span>
+    </a>
+    <a class="highlight-item" onclick="showPage('history')" href="#">
+      <span class="hi-icon">📅</span>
+      <span class="hi-label">Berdiri Sejak</span>
+      <span class="hi-value">± Tahun 1545</span>
+    </a>
+  </div>
+
+  <div class="home-about">
+    <div class="home-about-img"></div>
+    <div class="home-about-text">
+      <span class="section-label">Tentang Fort Rotterdam</span>
+      <h2>Benteng yang Menyimpan Seribu Cerita</h2>
+      <p>Fort Rotterdam, atau Benteng Ujung Pandang, adalah salah satu peninggalan bersejarah paling megah di kawasan Indonesia Timur. Dibangun oleh Kerajaan Gowa dan kemudian diperluas oleh VOC, benteng ini menjadi saksi bisu pergulatan sejarah, budaya, dan penjajahan selama berabad-abad.</p>
+      <p>Di dalam kompleks seluas ±3 hektar ini, terdapat Museum La Galigo, ruang tahanan Pangeran Diponegoro, dan deretan gedung bergaya Eropa yang terawat dengan baik hingga hari ini.</p>
+      <a class="btn-primary" onclick="showPage('history')" href="#">Selengkapnya →</a>
+    </div>
+  </div>
+
+  <div class="home-spots">
+    <div class="home-spots-header">
+      <div>
+        <span class="section-label">Titik Menarik</span>
+        <h2>Jelajahi Area<br>Fort Rotterdam</h2>
+      </div>
+      <a class="btn-outline" onclick="showPage('attractions')" href="#" style="border-color:var(--terracotta);color:var(--terracotta);">Lihat Semua</a>
+    </div>
+    <div class="spots-grid">
+      <a class="spot-card" onclick="showPage('attractions')" href="#">
+        <div class="spot-card-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/640px-Fort_Rotterdam_Makassar.jpg')"></div>
+        <div class="spot-card-body">
+          <span class="spot-tag">Museum</span>
+          <h3>Museum La Galigo</h3>
+          <p>Museum terlengkap di Sulawesi Selatan dengan koleksi artefak budaya dan sejarah Bugis-Makassar yang sangat kaya.</p>
+        </div>
+      </a>
+      <a class="spot-card" onclick="showPage('attractions')" href="#">
+        <div class="spot-card-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg')"></div>
+        <div class="spot-card-body">
+          <span class="spot-tag">Sejarah</span>
+          <h3>Ruang Tahanan Diponegoro</h3>
+          <p>Sel tempat Pangeran Diponegoro ditahan selama pengasingannya di Makassar hingga wafat tahun 1855.</p>
+        </div>
+      </a>
+      <a class="spot-card" onclick="showPage('attractions')" href="#">
+        <div class="spot-card-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg/640px-Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg')"></div>
+        <div class="spot-card-body">
+          <span class="spot-tag">Arsitektur</span>
+          <h3>Menara Pengawas</h3>
+          <p>Menara sudut benteng bergaya Eropa abad ke-17 yang masih berdiri kokoh, menawarkan panorama kota dan laut.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HISTORY PAGE
+============================================================ -->
+<section id="history" class="page-section">
+  <div class="history-hero">
+    <div class="page-hero-content">
+      <span class="page-tag">Sejarah & Asal Usul</span>
+      <h1>Dari Kerajaan Gowa<br>Hingga Warisan Dunia</h1>
+    </div>
+  </div>
+
+  <div class="history-body">
+    <div class="history-timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-year">± 1545 M</span>
+        <h3>Pendirian oleh Kerajaan Gowa</h3>
+        <p>Benteng ini pertama kali dibangun oleh Raja Gowa ke-9 (Tumaparisi Kallona) dalam bentuk sederhana dari tanah liat. Lokasi strategisnya di pesisir Selat Makassar menjadikannya pusat pertahanan dan perdagangan Kerajaan Gowa-Tallo yang saat itu berjaya di kawasan Nusantara.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-year">1634 M</span>
+        <h3>Dibangun Ulang dengan Batu</h3>
+        <p>Sultan Alauddin, Raja Gowa ke-14, memerintahkan pembangunan ulang benteng menggunakan batu untuk memperkuat pertahanan. Bentuk benteng yang menyerupai penyu — hewan simbol umur panjang — dipercaya merefleksikan cita-cita keabadian Kerajaan Gowa.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-year">1667 M</span>
+        <h3>Jatuh ke Tangan VOC</h3>
+        <p>Melalui Perjanjian Bongaya yang mengakhiri Perang Makassar, Kerajaan Gowa dipaksa menyerahkan benteng kepada Kompeni VOC. Gubernur Jenderal Cornelis Speelman kemudian mengubah namanya menjadi Fort Rotterdam, diambil dari nama kota kelahirannya di Belanda.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-year">1830 – 1855 M</span>
+        <h3>Masa Pengasingan Pangeran Diponegoro</h3>
+        <p>Pahlawan nasional Indonesia, Pangeran Diponegoro, diasingkan oleh Belanda ke Fort Rotterdam setelah ditipu dalam perundingan di Magelang. Beliau menghabiskan sisa hidupnya di dalam benteng ini dan wafat pada tahun 1855, meninggalkan catatan sejarah yang tak terlupakan.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-year">1970 – Kini</span>
+        <h3>Pemugaran & Cagar Budaya Nasional</h3>
+        <p>Pemerintah Indonesia melakukan pemugaran besar-besaran dan menetapkan Fort Rotterdam sebagai situs cagar budaya nasional. Kini benteng ini berfungsi sebagai kompleks museum, pusat penelitian budaya, dan destinasi wisata sejarah terpopuler di Makassar yang dikunjungi jutaan orang setiap tahun.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="history-facts">
+    <div class="fact-card">
+      <div class="fact-number">±481</div>
+      <div class="fact-desc">Tahun Usia Benteng</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-number">3 Ha</div>
+      <div class="fact-desc">Luas Kompleks</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-number">16</div>
+      <div class="fact-desc">Gedung Bersejarah</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISITOR INFO PAGE
+============================================================ -->
+<section id="visitor" class="page-section">
+  <div class="visitor-hero">
+    <div class="page-hero-content">
+      <span class="page-tag">Informasi Kunjungan</span>
+      <h1>Rencanakan<br>Kunjungan Anda</h1>
+    </div>
+  </div>
+
+  <div class="visitor-body">
+    <div class="info-block">
+      <div class="info-block-title">🕐 Jam Operasional</div>
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div><span class="info-label">Senin – Jumat</span><div class="info-val">08:00 – 18:00 WITA</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div><span class="info-label">Sabtu – Minggu & Libur Nasional</span><div class="info-val">07:00 – 19:00 WITA</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">⚠️</div>
+        <div><span class="info-label">Catatan</span><div class="info-val" style="color:var(--terracotta-dark);font-size:0.88rem;">Pengunjung terakhir masuk 30 menit sebelum tutup</div></div>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-block-title">🎟 Harga Tiket Masuk</div>
+      <table class="ticket-table">
+        <thead><tr><th>Kategori</th><th>Harga</th></tr></thead>
+        <tbody>
+          <tr><td>Anak-anak (di bawah 12 tahun)</td><td>Rp 2.000</td></tr>
+          <tr><td>Pelajar / Mahasiswa (dengan kartu)</td><td>Rp 5.000</td></tr>
+          <tr><td>Dewasa Umum</td><td>Rp 10.000</td></tr>
+          <tr><td>Wisatawan Mancanegara</td><td>Rp 25.000</td></tr>
+          <tr><td>Rombongan (min. 20 orang)</td><td>Diskon 20%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-block">
+      <div class="info-block-title">📋 Aturan & Larangan</div>
+      <ul class="rules-list">
+        <li>Dilarang membawa makanan dan minuman ke dalam area museum</li>
+        <li>Dilarang menyentuh artefak dan koleksi museum</li>
+        <li>Dilarang membuang sampah sembarangan di area benteng</li>
+        <li>Dilarang masuk ke area terlarang tanpa izin pengelola</li>
+        <li>Dilarang membawa hewan peliharaan ke dalam kompleks</li>
+        <li>Dilarang melakukan vandalisme pada bangunan bersejarah</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <div class="info-block-title">🚗 Akses & Transportasi</div>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div><span class="info-label">Alamat Lengkap</span><div class="info-val">Jl. Ujung Pandang No.1, Bulo Gading, Kec. Ujung Pandang, Kota Makassar, Sulawesi Selatan 90111</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🚌</div>
+        <div><span class="info-label">Angkutan Umum</span><div class="info-val">Pete-pete jurusan Pantai Losari, turun di depan benteng</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🛵</div>
+        <div><span class="info-label">Ojek Online</span><div class="info-val">Cari "Fort Rotterdam" atau "Benteng Ujung Pandang" di aplikasi</div></div>
+      </div>
+    </div>
+
+    <div class="map-embed">
+      <div class="map-header"><span>📍</span><h3>Denah & Lokasi Fort Rotterdam</h3></div>
+      <div class="map-frame">
+        <div class="map-overlay-card">
+          <h4>Fort Rotterdam Makassar</h4>
+          <p>Monumen bersejarah pertahanan Kerajaan Gowa & VOC.</p>
+          <a href="https://maps.google.com/?q=Fort+Rotterdam+Makassar" target="_blank" class="map-pin">📍 Buka di Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ATTRACTIONS PAGE
+============================================================ -->
+<section id="attractions" class="page-section">
+  <div class="attractions-hero">
+    <div class="page-hero-content">
+      <span class="page-tag">Eksplorasi & Titik Menarik</span>
+      <h1>Temukan Setiap<br>Sudut Benteng</h1>
+    </div>
+  </div>
+
+  <div class="attractions-grid-wrap">
+    <span class="section-label" style="color:var(--terracotta);margin-bottom:1.5rem;display:flex;">8 Titik Utama untuk Dijelajahi</span>
+    <div class="attractions-grid">
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/640px-Fort_Rotterdam_Makassar.jpg')"><div class="attraction-num">01</div></div>
+        <div class="attraction-body"><div class="attr-type">Museum Utama</div><h3>Museum La Galigo</h3><p>Museum terbesar di Sulawesi Selatan dengan ribuan koleksi benda-benda bersejarah, termasuk naskah kuno, senjata tradisional, dan pakaian adat suku-suku Bugis, Makassar, Toraja, dan Mandar.</p></div>
+      </div>
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg')"><div class="attraction-num">02</div></div>
+        <div class="attraction-body"><div class="attr-type">Situs Bersejarah</div><h3>Sel Pangeran Diponegoro</h3><p>Sel tempat Pahlawan Nasional Pangeran Diponegoro menjalani pengasingan selama 25 tahun dari tahun 1830 hingga wafat. Di sini tersimpan berbagai peninggalan beliau, termasuk replika kaligrafi dan lukisan potret.</p></div>
+      </div>
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg/640px-Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg')"><div class="attraction-num">03</div></div>
+        <div class="attraction-body"><div class="attr-type">Arsitektur</div><h3>Menara & Tembok Benteng</h3><p>Tembok benteng setebal 2 meter yang dibangun menggunakan batu karang laut. Terdapat empat menara sudut yang dulunya berfungsi sebagai pos pengamatan dan pertahanan militer VOC.</p></div>
+      </div>
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Gedung_di_Fort_Rotterdam.jpg/640px-Gedung_di_Fort_Rotterdam.jpg')"><div class="attraction-num">04</div></div>
+        <div class="attraction-body"><div class="attr-type">Taman & Ruang Terbuka</div><h3>Taman Dalam Benteng</h3><p>Area hijau yang rindang di tengah kompleks benteng, menjadi tempat favorit pengunjung untuk bersantai sambil menikmati suasana historis. Sering digunakan sebagai lokasi foto dan acara budaya.</p></div>
+      </div>
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/640px-Fort_Rotterdam_Makassar.jpg');filter:brightness(0.85)"><div class="attraction-num">05</div></div>
+        <div class="attraction-body"><div class="attr-type">Gedung Kolonial</div><h3>Gedung Belanda (VOC)</h3><p>Deretan gedung bergaya arsitektur Eropa abad ke-17 yang digunakan VOC sebagai gudang, kantor administrasi, dan asrama tentara. Beberapa gedung kini digunakan sebagai galeri dan ruang pameran.</p></div>
+      </div>
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gate_of_Fort_Rotterdam.jpg/640px-Gate_of_Fort_Rotterdam.jpg')"><div class="attraction-num">06</div></div>
+        <div class="attraction-body"><div class="attr-type">Spot Foto</div><h3>Gerbang Utama</h3><p>Pintu gerbang besar bergaya Eropa klasik yang menjadi ikon dan spot foto paling populer di Fort Rotterdam. Ukiran detail pada batu gerbang mencerminkan perpaduan estetika Eropa dan lokal.</p></div>
+      </div>
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cannons_at_Fort_Rotterdam.jpg/640px-Cannons_at_Fort_Rotterdam.jpg')"><div class="attraction-num">07</div></div>
+        <div class="attraction-body"><div class="attr-type">Fortifikasi</div><h3>Bastion Buton</h3><p>Bastion sudut pertahanan barat daya benteng yang menghadap ke laut. Menyediakan pemandangan laut yang indah dan meriam bersejarah yang masih terawat baik di atas benteng.</p></div>
+      </div>
+      <div class="attraction-card">
+        <div class="attraction-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg');filter:hue-rotate(15deg)"><div class="attraction-num">08</div></div>
+        <div class="attraction-body"><div class="attr-type">Fortifikasi</div><h3>Bastion Mandarsyah</h3><p>Sudut fortifikasi pertahanan benteng sebelah utara yang kokoh. Dari puncak menara pengawas ini, pengawal benteng dapat mengawasi seluruh wilayah utara Makassar dari potensi ancaman.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FACILITIES PAGE
+============================================================ -->
+<section id="facilities" class="page-section">
+  <div class="facilities-hero">
+    <div class="page-hero-content">
+      <span class="page-tag">Fasilitas Kompleks</span>
+      <h1>Kenyamanan Pengunjung<br>Adalah Prioritas</h1>
+    </div>
+  </div>
+
+  <div class="facilities-grid-wrap">
+    <div class="facilities-grid">
+      <div class="facility-card"><span class="fac-icon">🏛</span><h3>Museum Budaya</h3><p>Dua gedung utama berfungsi sebagai ruang pameran permanen Museum La Galigo dengan pendingin ruangan dan pemandu khusus.</p><span class="fac-status fac-available">Tersedia</span></div>
+      <div class="facility-card"><span class="fac-icon">🚻</span><h3>Toilet & Area Sanitasi</h3><p>Toilet bersih di beberapa sudut benteng yang dirawat berkala untuk kenyamanan para wisatawan.</p><span class="fac-status fac-available">Tersedia</span></div>
+      <div class="facility-card"><span class="fac-icon">🕌</span><h3>Musholla</h3><p>Tempat ibadah yang bersih dan sejuk dilengkapi dengan tempat wudhu khusus bagi pengunjung muslim.</p><span class="fac-status fac-available">Tersedia</span></div>
+      <div class="facility-card"><span class="fac-icon">🚗</span><h3>Area Parkir Luas</h3><p>Area parkir yang memadai untuk menampung kendaraan roda dua, roda empat, hingga bus pariwisata di luar kompleks benteng.</p><span class="fac-status fac-available">Tersedia</span></div>
+      <div class="facility-card"><span class="fac-icon">🗣</span><h3>Pemandu Wisata</h3><p>Pemandu wisata bersertifikasi yang menguasai berbagai bahasa asing siap menemani perjalanan sejarah Anda.</p><span class="fac-status fac-limited">Terbatas</span></div>
+      <div class="facility-card"><span class="fac-icon">☕</span><h3>Kantin & Toko Suvenir</h3><p>Kios suvenir kerajinan tangan khas Sulawesi Selatan dan kantin yang menjual makanan ringan serta minuman.</p><span class="fac-status fac-limited">Terbatas</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY PAGE
+============================================================ -->
+<section id="gallery" class="page-section">
+  <div class="gallery-hero">
+    <div class="page-hero-content">
+      <span class="page-tag">Galeri Foto & Sudut Indah</span>
+      <h1>Keindahan Visual<br>Fort Rotterdam</h1>
+    </div>
+  </div>
+
+  <div class="gallery-body">
+    <div class="gallery-filter">
+      <button class="filter-btn active" onclick="filterGallery('all')">Semua</button>
+      <button class="filter-btn" onclick="filterGallery('sejarah')">Sejarah</button>
+      <button class="filter-btn" onclick="filterGallery('arsitektur')">Arsitektur</button>
+      <button class="filter-btn" onclick="filterGallery('suasana')">Suasana</button>
+    </div>
+    <div class="gallery-masonry" id="gallery-grid">
+      <div class="gallery-item" data-category="arsitektur" onclick="openLightbox('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg','Gedung Bergaya Kolonial Belanda Abad-17')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg" alt="Gedung Kolonial">
+        <div class="gallery-overlay"><span class="gallery-caption">Arsitektur &bull; Gedung Kolonial</span></div>
+      </div>
+      <div class="gallery-item" data-category="sejarah" onclick="openLightbox('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg','Gerbang Utama & Posisi Strategis Benteng')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg" alt="Sisi Depan Benteng">
+        <div class="gallery-overlay"><span class="gallery-caption">Sejarah &bull; Sisi Depan Benteng</span></div>
+      </div>
+      <div class="gallery-item" data-category="arsitektur" onclick="openLightbox('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg/640px-Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg','Struktur Tembok Dan Gedung Utama')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg/640px-Indonesia_-_Sulawesi_-_Fort_Rotterdam_01.jpg" alt="Tembok Benteng">
+        <div class="gallery-overlay"><span class="gallery-caption">Arsitektur &bull; Tembok & Menara</span></div>
+      </div>
+      <div class="gallery-item" data-category="suasana" onclick="openLightbox('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Gedung_di_Fort_Rotterdam.jpg/640px-Gedung_di_Fort_Rotterdam.jpg','Taman Hijau Asri Di Dalam Kompleks Benteng')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Gedung_di_Fort_Rotterdam.jpg/640px-Gedung_di_Fort_Rotterdam.jpg" alt="Halaman Dalam">
+        <div class="gallery-overlay"><span class="gallery-caption">Suasana &bull; Halaman Dalam</span></div>
+      </div>
+      <div class="gallery-item" data-category="arsitektur" onclick="openLightbox('https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gate_of_Fort_Rotterdam.jpg/640px-Gate_of_Fort_Rotterdam.jpg','Ukiran Batu Eropa Klasik Di Pintu Gerbang')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gate_of_Fort_Rotterdam.jpg/640px-Gate_of_Fort_Rotterdam.jpg" alt="Gerbang Masuk">
+        <div class="gallery-overlay"><span class="gallery-caption">Arsitektur &bull; Gerbang Masuk</span></div>
+      </div>
+      <div class="gallery-item" data-category="sejarah" onclick="openLightbox('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cannons_at_Fort_Rotterdam.jpg/640px-Cannons_at_Fort_Rotterdam.jpg','Meriam VOC Pertahanan Pesisir Pantai')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cannons_at_Fort_Rotterdam.jpg/640px-Cannons_at_Fort_Rotterdam.jpg" alt="Meriam Pertahanan">
+        <div class="gallery-overlay"><span class="gallery-caption">Sejarah &bull; Meriam Pertahanan</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <div class="lightbox-content">
+    <img src="" alt="Lightbox Image" id="lightbox-img">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+</div>
+
+<!-- ============================================================
+     CONTACT PAGE
+============================================================ -->
+<section id="contact" class="page-section">
+  <div class="contact-hero">
+    <div class="page-hero-content">
+      <span class="page-tag">Hubungi Kami & Pemesanan</span>
+      <h1>Mulai Rencana<br>Perjalanan Anda</h1>
+    </div>
+  </div>
+
+  <div class="contact-body">
+    <div class="contact-info">
+      <h2>Ingin Berdiskusi Atau Butuh Bantuan?</h2>
+      <p>Tim pengelola cagar budaya Fort Rotterdam Makassar siap membantu merencanakan kunjungan grup, riset pendidikan, pemotretan komersial, maupun sewa gedung pertemuan.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail-text"><span>Alamat Kantor</span><p>Balai Pelestarian Cagar Budaya Sulsel, Jl. Ujung Pandang No. 1, Makassar</p></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail-text"><span>Telepon Resmi</span><p>+62 (411) 361-2356 (Jam Kerja)</p></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-detail-text"><span>Email Layanan</span><p>info@rotterdamxplore.com</p></div>
+      </div>
+    </div>
+
+    <div class="booking-form-wrapper">
+      <form class="booking-form" id="ticket-booking-form" onsubmit="handleFormSubmit(event)">
+        <h3 class="form-title">Pemesanan Tiket Wisata</h3>
+        <p class="form-subtitle">Formulir pemesanan tiket masuk perorangan maupun rombongan.</p>
+        <div class="form-group">
+          <label for="booking-name">Nama Lengkap</label>
+          <input type="text" id="booking-name" required placeholder="Masukkan nama lengkap Anda">
+        </div>
+        <div class="form-group">
+          <label for="booking-email">Alamat Email</label>
+          <input type="email" id="booking-email" required placeholder="name@domain.com">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-date">Tanggal Kunjungan</label>
+            <input type="date" id="booking-date" required>
+          </div>
+          <div class="form-group">
+            <label for="booking-category">Kategori Pengunjung</label>
+            <select id="booking-category" onchange="calculateTotalPrice()" required>
+              <option value="adult" selected>Dewasa Umum (Rp 10.000)</option>
+              <option value="student">Pelajar / Mahasiswa (Rp 5.000)</option>
+              <option value="child">Anak-anak (Rp 2.000)</option>
+              <option value="foreign">Wisatawan Asing (Rp 25.000)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="booking-quantity">Jumlah Tiket</label>
+          <input type="number" id="booking-quantity" min="1" max="100" value="1" oninput="calculateTotalPrice()" required>
+        </div>
+        <div class="price-summary-box">
+          <div class="summary-row"><span>Harga Satuan:</span><span id="summary-unit-price">Rp 10.000</span></div>
+          <div class="summary-row"><span>Jumlah Tiket:</span><span id="summary-qty">1 Tiket</span></div>
+          <div class="summary-row discount-row" id="discount-row" style="display:none;"><span>Diskon Rombongan (20%):</span><span id="summary-discount">-Rp 0</span></div>
+          <div class="summary-row total-row"><span>Total Pembayaran:</span><span id="summary-total">Rp 10.000</span></div>
+        </div>
+        <button type="submit" class="form-submit">Konfirmasi Pemesanan &amp; Bayar</button>
+      </form>
+      <div class="form-success" id="form-success-state">
+        <div class="form-success-icon">🎉</div>
+        <h3>Pemesanan Berhasil!</h3>
+        <p>Terima kasih atas pesanan Anda. E-ticket resmi beserta detail pembayaran telah dikirimkan ke alamat email Anda. Tunjukkan QR Code pada email saat tiba di pintu gerbang benteng.</p>
+        <button class="btn-primary" onclick="resetBookingForm()" style="margin-top:1.5rem;width:100%;">Pesan Tiket Lagi</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="footer-brand">
+    <h3>Rotterdam<span>Xplore</span></h3>
+    <p>Aplikasi pemandu wisata digital terintegrasi untuk kawasan Cagar Budaya Fort Rotterdam Ujung Pandang, Makassar. Lestarikan sejarah, jelajahi budaya bangsa.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Peta Situs</h4>
+    <ul>
+      <li><a onclick="showPage('home')">Beranda</a></li>
+      <li><a onclick="showPage('history')">Sejarah & Timeline</a></li>
+      <li><a onclick="showPage('visitor')">Info Kunjungan</a></li>
+      <li><a onclick="showPage('attractions')">Situs Eksplorasi</a></li>
+      <li><a onclick="showPage('facilities')">Fasilitas</a></li>
+      <li><a onclick="showPage('gallery')">Galeri Foto</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Hubungi Layanan</h4>
+    <ul>
+      <li><a onclick="showPage('contact')">Formulir Kontak</a></li>
+      <li><a href="mailto:info@rotterdamxplore.com">info@rotterdamxplore.com</a></li>
+      <li><a href="tel:+624113612356">+62 (411) 361-2356</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="footer-bottom">
+  <p>&copy; 2026 RotterdamXplore Makassar. Cagar Budaya Nasional Sulsel. Hak Cipta Dilindungi.</p>
+</div>
+
+<script>
+/**
+ * ROTTERDAMXPLORE — APP CONTROLLER
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+  calculateTotalPrice();
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+});
+
+function showPage(pageId) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(pageId);
+  if (target) target.classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
+      link.classList.add('active');
+    }
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function filterGallery(category) {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(category)) btn.classList.add('active');
+  });
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    const cat = item.getAttribute('data-category');
+    if (category === 'all' || cat === category) {
+      item.style.display = 'block';
+      setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
+    } else {
+      item.style.opacity = '0';
+      item.style.transform = 'scale(0.95)';
+      setTimeout(() => { item.style.display = 'none'; }, 300);
+    }
+  });
+}
+
+function openLightbox(imgSrc, captionText) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  if (lightbox && lightboxImg && lightboxCaption) {
+    lightboxImg.src = imgSrc;
+    lightboxCaption.textContent = captionText;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function calculateTotalPrice() {
+  const categorySelect = document.getElementById('booking-category');
+  const quantityInput = document.getElementById('booking-quantity');
+  if (!categorySelect || !quantityInput) return;
+  const category = categorySelect.value;
+  let quantity = parseInt(quantityInput.value);
+  if (isNaN(quantity) || quantity < 1) quantity = 1;
+  const priceList = { adult: 10000, student: 5000, child: 2000, foreign: 25000 };
+  const unitPrice = priceList[category] || 10000;
+  let totalPrice = unitPrice * quantity;
+  let discount = 0;
+  const discountRow = document.getElementById('discount-row');
+  const discountLabel = document.getElementById('summary-discount');
+  if (quantity >= 20) {
+    discount = totalPrice * 0.20;
+    totalPrice = totalPrice - discount;
+    if (discountRow && discountLabel) {
+      discountRow.style.display = 'flex';
+      discountLabel.textContent = '-Rp ' + formatRupiah(discount);
+    }
+  } else {
+    if (discountRow) discountRow.style.display = 'none';
+  }
+  document.getElementById('summary-unit-price').textContent = 'Rp ' + formatRupiah(unitPrice);
+  document.getElementById('summary-qty').textContent = quantity + ' Tiket';
+  document.getElementById('summary-total').textContent = 'Rp ' + formatRupiah(totalPrice);
+}
+
+function formatRupiah(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const name = document.getElementById('booking-name').value;
+  const email = document.getElementById('booking-email').value;
+  const date = document.getElementById('booking-date').value;
+  if (!name || !email || !date) { alert('Harap lengkapi semua data formulir!'); return; }
+  const bookingForm = document.getElementById('ticket-booking-form');
+  const successState = document.getElementById('form-success-state');
+  if (bookingForm && successState) {
+    bookingForm.classList.add('hide');
+    setTimeout(() => {
+      successState.classList.add('show');
+      const formWrapper = document.querySelector('.booking-form-wrapper');
+      if (formWrapper) formWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  }
+}
+
+function resetBookingForm() {
+  const bookingForm = document.getElementById('ticket-booking-form');
+  const successState = document.getElementById('form-success-state');
+  if (bookingForm && successState) {
+    bookingForm.reset();
+    successState.classList.remove('show');
+    bookingForm.classList.remove('hide');
+    calculateTotalPrice();
+    const formWrapper = document.querySelector('.booking-form-wrapper');
+    if (formWrapper) formWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+</script>
+</body>
+</html>

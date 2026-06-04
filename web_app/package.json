@@ -1,0 +1,12 @@
+{
+  "name": "rotterdamxplore-web",
+  "version": "1.0.0",
+  "description": "Premium standalone web app for RotterdamXplore — Fort Rotterdam Makassar",
+  "main": "index.html",
+  "scripts": {
+    "dev": "browser-sync start --server --files \"css/*.css, js/*.js, *.html\""
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.3"
+  }
+}

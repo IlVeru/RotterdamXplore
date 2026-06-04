@@ -1,0 +1,1782 @@
+/* ============================================================
+   DESIGN SYSTEM & VARIABLES
+============================================================ */
+:root {
+  /* HSL Tailored Colors */
+  --terracotta: #C1440E;
+  --terracotta-dark: #8B2E08;
+  --terracotta-light: #E8835A;
+  --cream: #F5EDD8;
+  --cream-dark: #E8D9B8;
+  --dark: #1A1208;
+  --dark-mid: #2D2015;
+  --stone: #6B5B47;
+  --stone-light: #9C8B76;
+  --text-body: #3D2B1A;
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --white: #FDFAF4;
+  
+  /* Blends & Highlights */
+  --glass-bg: rgba(26, 18, 8, 0.92);
+  --glass-border: rgba(201, 168, 76, 0.2);
+  --shadow-warm: rgba(139, 46, 8, 0.08);
+  --shadow-strong: rgba(26, 18, 8, 0.15);
+  
+  /* Fonts */
+  --font-headings: 'Playfair Display', Georgia, serif;
+  --font-body: 'Crimson Pro', Georgia, serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+/* ============================================================
+   GLOBAL STYLES & RESET
+============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--text-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--terracotta);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terracotta-dark);
+}
+
+/* ========== NOISE TEXTURE OVERLAY ========== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ========== BUTTONS & COMPONENTS ========== */
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--terracotta);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(193, 68, 14, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--terracotta-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(193, 68, 14, 0.35);
+}
+
+.btn-outline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(245, 237, 216, 0.5);
+  padding: 1rem 2.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracotta-light);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--terracotta-light);
+}
+
+/* ============================================================
+   NAVBAR (GLASSMORPHISM)
+============================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 4rem;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.nav-logo {
+  font-family: var(--font-headings);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-logo span {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 237, 216, 0.7);
+  text-decoration: none;
+  transition: color 0.25s, transform 0.2s;
+  cursor: pointer;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--gold);
+}
+
+.nav-cta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--terracotta);
+  color: var(--white);
+  border: none;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.nav-cta:hover {
+  background: var(--terracotta-dark);
+  box-shadow: 0 4px 12px rgba(193, 68, 14, 0.3);
+}
+
+/* ============================================================
+   PAGE SECTION TRANSITIONS
+============================================================ */
+.page-section {
+  display: none;
+  min-height: 100vh;
+  padding-top: 76px;
+  animation: pageFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page-section.active {
+  display: block;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   BERANDA (HOME) PAGE
+============================================================ */
+#home {
+  padding-top: 0;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 650px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(26,18,8,0.2) 0%, rgba(26,18,8,0.88) 100%),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover no-repeat;
+  animation: slowzoom 22s ease-in-out infinite alternate;
+}
+
+@keyframes slowzoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 6rem 7rem;
+  max-width: 960px;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.45);
+  padding: 0.4rem 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.hero h1 {
+  font-family: var(--font-headings);
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--terracotta-light);
+}
+
+.hero p {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: rgba(245,237,216,0.85);
+  max-width: 580px;
+  line-height: 1.65;
+  margin-bottom: 2.8rem;
+  font-weight: 300;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 6rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-scroll-hint span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245,237,216,0.5);
+  writing-mode: vertical-rl;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(245,237,216,0.5), transparent);
+  animation: scrollpulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollpulse {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(5px); }
+}
+
+/* Highlights Bar */
+.highlights-bar {
+  background: var(--dark);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.highlight-item {
+  padding: 3rem 2rem;
+  border-right: 1px solid rgba(201,168,76,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-item:last-child {
+  border-right: none;
+}
+
+.highlight-item:hover {
+  background: rgba(201,168,76,0.06);
+  transform: translateY(-4px);
+}
+
+.hi-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.hi-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.hi-value {
+  font-family: var(--font-headings);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+/* About Teaser */
+.home-about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+}
+
+.home-about-img {
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+.home-about-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(193,68,14,0.18));
+}
+
+.home-about-text {
+  background: var(--dark-mid);
+  padding: 6rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-about-text h2 {
+  font-family: var(--font-headings);
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 1.8rem;
+}
+
+.home-about-text p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: rgba(245,237,216,0.72);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+/* Spots Teaser */
+.home-spots {
+  padding: 7rem 6rem;
+  background: var(--cream);
+}
+
+.home-spots-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+.home-spots-header h2 {
+  font-family: var(--font-headings);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.15;
+}
+
+.spots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.spot-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.spot-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px var(--shadow-warm);
+}
+
+.spot-card-img {
+  height: 220px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+
+.spot-card:hover .spot-card-img {
+  transform: scale(1.04);
+}
+
+.spot-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,18,8,0.7), transparent 60%);
+  opacity: 0.2;
+  transition: opacity 0.3s;
+}
+
+.spot-card:hover .spot-card-img::after {
+  opacity: 0.8;
+}
+
+.spot-card-body {
+  padding: 1.8rem;
+}
+
+.spot-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.spot-card-body h3 {
+  font-family: var(--font-headings);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.6rem;
+}
+
+.spot-card-body p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--stone);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   SEJARAH (HISTORY) PAGE
+============================================================ */
+#history {
+  background: var(--dark);
+}
+
+.history-hero {
+  height: 52vh;
+  min-height: 380px;
+  background:
+    linear-gradient(to bottom, rgba(26,18,8,0.35), rgba(26,18,8,0.92)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center 35%/cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 6rem;
+}
+
+.page-hero-content .page-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.page-hero-content h1 {
+  font-family: var(--font-headings);
+  font-size: clamp(2rem, 5.5vw, 4rem);
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 1.1;
+}
+
+.history-body {
+  background: var(--dark);
+  padding: 6rem 6rem 8rem;
+}
+
+.history-timeline {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.history-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+.timeline-item {
+  padding-left: 3.5rem;
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.timeline-item h3 {
+  font-family: var(--font-headings);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 1rem;
+}
+
+.timeline-item p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: rgba(245,237,216,0.68);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 680px;
+}
+
+.history-facts {
+  background: var(--dark-mid);
+  border-top: 1px solid rgba(201,168,76,0.12);
+  padding: 5rem 6rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.fact-card {
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 2.5rem;
+  text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.fact-card:hover {
+  border-color: var(--terracotta);
+  background: rgba(193,68,14,0.04);
+}
+
+.fact-number {
+  font-family: var(--font-headings);
+  font-size: 3.8rem;
+  font-weight: 900;
+  color: var(--terracotta);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.fact-desc {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,237,216,0.55);
+}
+
+/* ============================================================
+   INFO KUNJUNGAN (VISITOR) PAGE
+============================================================ */
+#visitor {
+  background: var(--cream);
+}
+
+.visitor-hero {
+  height: 42vh;
+  min-height: 320px;
+  background:
+    linear-gradient(135deg, rgba(139,46,8,0.85), rgba(26,18,8,0.8)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 6rem;
+}
+
+.visitor-body {
+  padding: 6rem 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.info-block {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  padding: 3rem;
+  box-shadow: 0 4px 15px rgba(26, 18, 8, 0.02);
+}
+
+.info-block-title {
+  font-family: var(--font-headings);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 2px solid var(--terracotta);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.info-val {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-body);
+  font-weight: 600;
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.ticket-table th {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stone);
+  text-align: left;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.ticket-table td {
+  padding: 1rem 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--cream-dark);
+  color: var(--text-body);
+}
+
+.ticket-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ticket-table td:last-child {
+  font-weight: 700;
+  color: var(--terracotta-dark);
+  text-align: right;
+}
+
+.map-embed {
+  grid-column: 1 / -1;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(26, 18, 8, 0.02);
+}
+
+.map-header {
+  padding: 2rem;
+  border-bottom: 1px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.map-header h3 {
+  font-family: var(--font-headings);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.map-frame {
+  height: 400px;
+  background:
+    linear-gradient(rgba(26, 18, 8, 0.45), rgba(26, 18, 8, 0.7)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2rem;
+}
+
+.map-overlay-card {
+  background: var(--white);
+  padding: 2.2rem;
+  border-radius: 4px;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(26,18,8,0.25);
+  border: 1px solid var(--cream-dark);
+}
+
+.map-overlay-card h4 {
+  font-family: var(--font-headings);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+}
+
+.map-overlay-card p {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--stone);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.map-pin {
+  background: var(--terracotta);
+  color: white;
+  padding: 0.8rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 6px 20px rgba(193,68,14,0.3);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.map-pin:hover {
+  background: var(--terracotta-dark);
+  transform: scale(1.04);
+}
+
+.rules-list {
+  list-style: none;
+}
+
+.rules-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  color: var(--text-body);
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.rules-list li:last-child {
+  border-bottom: none;
+}
+
+.rules-list li::before {
+  content: '✗';
+  color: var(--terracotta);
+  font-weight: bold;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   EKSPLORASI (ATTRACTIONS) PAGE
+============================================================ */
+#attractions {
+  background: var(--cream);
+}
+
+.attractions-hero {
+  height: 42vh;
+  min-height: 320px;
+  background:
+    linear-gradient(to right, rgba(26,18,8,0.85), rgba(193,68,14,0.45)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') right/cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 6rem;
+}
+
+.attractions-grid-wrap {
+  padding: 6rem 6rem;
+}
+
+.attractions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--cream-dark);
+  border: 2px solid var(--cream-dark);
+}
+
+.attraction-card {
+  background: var(--white);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 200px;
+}
+
+.attraction-card:hover {
+  background: var(--cream);
+}
+
+.attraction-img {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.attraction-num {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  font-family: var(--font-headings);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: rgba(245,237,216,0.35);
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(26,18,8,0.15);
+}
+
+.attraction-body {
+  padding: 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.attr-type {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.6rem;
+}
+
+.attraction-body h3 {
+  font-family: var(--font-headings);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.8rem;
+}
+
+.attraction-body p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--stone);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   FASILITAS (FACILITIES) PAGE
+============================================================ */
+#facilities {
+  background: var(--dark);
+}
+
+.facilities-hero {
+  height: 42vh;
+  min-height: 300px;
+  background:
+    linear-gradient(to bottom, rgba(26,18,8,0.55), rgba(26,18,8,0.92)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fort_Rotterdam_2010.jpg/640px-Fort_Rotterdam_2010.jpg') center/cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 6rem;
+}
+
+.facilities-grid-wrap {
+  padding: 6rem 6rem;
+}
+
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.facility-card {
+  background: rgba(245,237,216,0.04);
+  border: 1px solid rgba(201,168,76,0.12);
+  padding: 3rem 2.2rem;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.facility-card:hover {
+  border-color: rgba(193,68,14,0.45);
+  background: rgba(193,68,14,0.06);
+  transform: translateY(-5px);
+}
+
+.fac-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.facility-card h3 {
+  font-family: var(--font-headings);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.8rem;
+}
+
+.facility-card p {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: rgba(245,237,216,0.55);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+.fac-status {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.9rem;
+  display: inline-block;
+}
+
+.fac-available {
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+.fac-limited {
+  background: rgba(201,168,76,0.15);
+  color: var(--gold-light);
+  border: 1px solid rgba(201,168,76,0.3);
+}
+
+/* ============================================================
+   GALERI (GALLERY) PAGE
+============================================================ */
+#gallery {
+  background: var(--dark);
+}
+
+.gallery-hero {
+  height: 38vh;
+  min-height: 280px;
+  background:
+    linear-gradient(to bottom, transparent, var(--dark)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 6rem;
+}
+
+.gallery-body {
+  padding: 5rem 6rem;
+}
+
+.gallery-filter {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+  color: rgba(245,237,216,0.5);
+  border: 1px solid rgba(245,237,216,0.15);
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--terracotta);
+  color: var(--white);
+  border-color: var(--terracotta);
+}
+
+.gallery-masonry {
+  columns: 3;
+  column-gap: 1.5rem;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: var(--dark-mid);
+  transition: all 0.3s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,18,8,0.9) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+/* Lightbox Modal */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,18,8,0.96);
+  z-index: 9000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: lightboxFade 0.3s ease forwards;
+  padding: 2rem;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+@keyframes lightboxFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox-content {
+  position: relative;
+  text-align: center;
+  max-width: 90vw;
+  max-height: 85vh;
+}
+
+.lightbox img {
+  max-width: 85vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border: 1px solid var(--glass-border);
+  animation: lightboxZoom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightboxZoom {
+  from { transform: scale(0.95); }
+  to   { transform: scale(1); }
+}
+
+.lightbox-caption {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  color: var(--cream);
+  margin-top: 1.2rem;
+  font-weight: 300;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: var(--terracotta);
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  z-index: 9100;
+}
+
+.lightbox-close:hover {
+  background: var(--terracotta-dark);
+  transform: rotate(90deg);
+}
+
+/* ============================================================
+   KONTAK & PEMESANAN (CONTACT) PAGE
+============================================================ */
+#contact {
+  background: var(--cream);
+}
+
+.contact-hero {
+  height: 38vh;
+  min-height: 280px;
+  background:
+    linear-gradient(135deg, rgba(139,46,8,0.9), rgba(26,18,8,0.75)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fort_Rotterdam_Makassar.jpg/1280px-Fort_Rotterdam_Makassar.jpg') center/cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 6rem;
+}
+
+.contact-body {
+  padding: 6rem 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+}
+
+.contact-info h2 {
+  font-family: var(--font-headings);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.contact-info p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--stone);
+  line-height: 1.75;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--terracotta);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(193, 68, 14, 0.25);
+}
+
+.contact-detail-text span {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.contact-detail-text p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-body);
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Booking Form Wrapper */
+.booking-form-wrapper {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  padding: 3rem;
+  position: relative;
+  box-shadow: 0 10px 30px var(--shadow-warm);
+}
+
+.form-title {
+  font-family: var(--font-headings);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--stone);
+  margin-bottom: 2.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  background: var(--cream);
+  border: 1px solid var(--cream-dark);
+  padding: 0.9rem 1.2rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-body);
+  outline: none;
+  transition: border-color 0.25s, background-color 0.25s;
+  border-radius: 0;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--terracotta);
+  background-color: var(--white);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Price Calculator Box */
+.price-summary-box {
+  background: var(--cream-dark);
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+  border: 1px dashed var(--stone-light);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--stone);
+}
+
+.summary-row span:last-child {
+  font-weight: 600;
+  color: var(--text-body);
+}
+
+.discount-row {
+  color: #166534;
+}
+
+.discount-row span:last-child {
+  color: #166534;
+}
+
+.total-row {
+  border-top: 1px solid var(--stone-light);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  font-size: 1.15rem;
+}
+
+.total-row span:first-child {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.total-row span:last-child {
+  font-family: var(--font-headings);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--terracotta);
+}
+
+.form-submit {
+  width: 100%;
+  background: var(--terracotta);
+  color: var(--white);
+  border: none;
+  padding: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(193, 68, 14, 0.2);
+}
+
+.form-submit:hover {
+  background: var(--terracotta-dark);
+  box-shadow: 0 6px 18px rgba(193, 68, 14, 0.35);
+}
+
+/* Success Form Page Overlay */
+.booking-form {
+  transition: opacity 0.3s ease;
+}
+
+.booking-form.hide {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 4rem 2rem;
+  animation: successPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.form-success.show {
+  display: block;
+}
+
+@keyframes successPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.form-success-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.form-success h3 {
+  font-family: var(--font-headings);
+  font-size: 1.8rem;
+  color: var(--dark);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.form-success p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--stone);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ============================================================
+   FOOTER & METADATA
+============================================================ */
+footer {
+  background: var(--dark);
+  padding: 5rem 6rem;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 4rem;
+  border-top: 1px solid rgba(201,168,76,0.12);
+}
+
+.footer-brand h3 {
+  font-family: var(--font-headings);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--cream);
+  margin-bottom: 1rem;
+}
+
+.footer-brand h3 span {
+  color: var(--gold);
+}
+
+.footer-brand p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(245,237,216,0.48);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.footer-col h4 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-col ul li a {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(245,237,216,0.48);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--cream);
+}
+
+.footer-bottom {
+  background: rgba(26,18,8,0.92);
+  padding: 1.5rem 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+
+.footer-bottom p {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,237,216,0.3);
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+============================================================ */
+
+/* Desktop & Large Tablet */
+@media (max-width: 1024px) {
+  nav {
+    padding: 0 2rem;
+  }
+  .hero-content {
+    padding: 0 3rem 5rem;
+  }
+  .history-body, .history-facts,
+  .visitor-body, .attractions-grid-wrap,
+  .facilities-grid-wrap, .gallery-body,
+  .contact-body, .home-spots {
+    padding: 4rem 2rem;
+  }
+  .history-hero, .visitor-hero, .attractions-hero,
+  .facilities-hero, .gallery-hero, .contact-hero {
+    padding: 3rem 2rem;
+  }
+  footer {
+    padding: 4rem 2rem;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .footer-bottom {
+    padding: 1.5rem 2rem;
+  }
+  .home-about-text {
+    padding: 4rem 3rem;
+  }
+  .spots-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .gallery-masonry {
+    columns: 2;
+  }
+}
+
+/* Small Tablet & Large Mobile */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 1.5rem;
+    height: 70px;
+  }
+  .nav-links {
+    display: none; /* Hide default menu, can be toggled if hamburger is added */
+  }
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+  .page-section {
+    padding-top: 70px;
+  }
+  
+  .hero-content {
+    padding: 0 1.5rem 4rem;
+  }
+  .hero h1 {
+    font-size: 3.2rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .highlights-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .highlight-item {
+    padding: 2rem 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .home-about {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .home-about-img {
+    height: 300px;
+  }
+  
+  .spots-grid,
+  .attractions-grid,
+  .facilities-grid,
+  .history-facts {
+    grid-template-columns: 1fr;
+  }
+  
+  .attraction-card {
+    grid-template-columns: 1fr;
+  }
+  .attraction-img {
+    height: 220px;
+  }
+  
+  .visitor-body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .contact-body {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  footer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .lightbox-close {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .highlights-bar {
+    grid-template-columns: 1fr;
+  }
+  .highlight-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .highlight-item:last-child {
+    border-bottom: none;
+  }
+  
+  .home-spots-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .gallery-masonry {
+    columns: 1;
+  }
+  
+  .booking-form-wrapper {
+    padding: 2rem 1.5rem;
+  }
+  
+  .info-block {
+    padding: 1.8rem;
+  }
+}
